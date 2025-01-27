@@ -1,7 +1,6 @@
 pyiqa==0.1.12
 opencv-python
 albumentations==1.4.18
-gradio==5.8.0
 bitsandbytes
 sentencepiece
 protobuf
@@ -9,4 +8,3 @@ python-box
 omegaconf
 loguru
 einops
-transformers
