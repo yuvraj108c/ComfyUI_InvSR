@@ -7,7 +7,7 @@
 
 This project is an unofficial ComfyUI implementation of [InvSR](https://github.com/zsyOAOA/InvSR) (Arbitrary-steps Image Super-resolution via Diffusion Inversion)
 
-<img height="500" src="https://github.com/user-attachments/assets/117d0668-1c72-46f6-a41d-d3c780614fb7" />
+<img height="500" src="https://github.com/user-attachments/assets/6c057a3c-3355-4060-9161-a88ab6f6d986" />
 
 </div>
 
