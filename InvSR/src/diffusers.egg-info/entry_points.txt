@@ -1,0 +1,3 @@
+[console_scripts]
+diffusers-cli = diffusers.commands.diffusers_cli:main
+
