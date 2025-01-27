@@ -2,9 +2,7 @@ pyiqa==0.1.12
 opencv-python
 albumentations==1.4.18
 bitsandbytes
-sentencepiece
 protobuf
 python-box
 omegaconf
 loguru
-einops
