@@ -1,0 +1,194 @@
+{
+  "last_node_id": 19,
+  "last_link_id": 23,
+  "nodes": [
+    {
+      "id": 19,
+      "type": "InvSRSampler",
+      "pos": [
+        55.69900894165039,
+        686.448486328125
+      ],
+      "size": [
+        315,
+        222
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "invsr_pipe",
+          "type": "INVSR_PIPE",
+          "link": 20
+        },
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            22
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InvSRSampler"
+      },
+      "widgets_values": [
+        1,
+        1,
+        8,
+        128,
+        "none",
+        2698764888,
+        "randomize"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "LoadImage",
+      "pos": [
+        -358.5283203125,
+        657.36962890625
+      ],
+      "size": [
+        243.02328491210938,
+        326.7896728515625
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            23
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "32.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "LoadInvSRModels",
+      "pos": [
+        -405.75823974609375,
+        447.1014404296875
+      ],
+      "size": [
+        393.43359375,
+        115.4765625
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "invsr_pipe",
+          "type": "INVSR_PIPE",
+          "links": [
+            20
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadInvSRModels"
+      },
+      "widgets_values": [
+        "stabilityai/sd-turbo",
+        "noise_predictor_sd_turbo_v5.pth",
+        true
+      ]
+    },
+    {
+      "id": 7,
+      "type": "PreviewImage",
+      "pos": [
+        447.3740539550781,
+        346.762451171875
+      ],
+      "size": [
+        922.890869140625,
+        953.0285034179688
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 22
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    }
+  ],
+  "links": [
+    [
+      20,
+      5,
+      0,
+      19,
+      0,
+      "INVSR_PIPE"
+    ],
+    [
+      22,
+      19,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      23,
+      17,
+      0,
+      19,
+      1,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.716405320312871,
+      "offset": [
+        852.8046167516175,
+        -157.41082842494103
+      ]
+    },
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0
+  },
+  "version": 0.4
+}
