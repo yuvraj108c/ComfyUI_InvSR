@@ -54,6 +54,7 @@ class LoadInvSRModels:
             "required": {
                 "sd_model": (['stabilityai/sd-turbo'],),
                 "invsr_model": (['noise_predictor_sd_turbo_v5.pth'],),
+                "dtype": (['fp16', 'fp32', 'bf16'], {"default": "fp16"}),
                 "tiled_vae": ("BOOLEAN", {"default": True}),
             },
         }
@@ -63,10 +64,19 @@ class LoadInvSRModels:
     FUNCTION = "loadmodel"
     CATEGORY = "INVSR"
 
-    def loadmodel(self, sd_model, invsr_model, tiled_vae):
+    def loadmodel(self, sd_model, invsr_model, dtype, tiled_vae):
+        match dtype:
+            case "fp16":
+                dtype = "torch.float16"
+            case "fp32":
+                dtype = "torch.float32"
+            case "bf16":
+                dtype = "torch.bfloat16"
+
         
         args = Namespace(bs=1, chopping_bs=8, timesteps=None, num_steps=1, cfg_path='custom_nodes/ComfyUI_InvSR/InvSR/configs/sample-sd-turbo.yaml', sd_path='models/diffusers', started_ckpt_path='custom_nodes/ComfyUI_InvSR/weights/noise_predictor_sd_turbo_v5.pth', tiled_vae=tiled_vae, color_fix='', chopping_size=128)
         configs = get_configs(args)
+        configs["sd_pipe"]["params"]["torch_dtype"] = dtype
         base_sampler = BaseSampler(configs)
 
         return (base_sampler,)

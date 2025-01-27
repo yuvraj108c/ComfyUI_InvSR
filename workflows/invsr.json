@@ -1,13 +1,60 @@
 {
-  "last_node_id": 19,
-  "last_link_id": 23,
+  "last_node_id": 25,
+  "last_link_id": 35,
   "nodes": [
+    {
+      "id": 20,
+      "type": "Image Comparer (rgthree)",
+      "pos": [
+        87.41485595703125,
+        78.13185119628906
+      ],
+      "size": [
+        1291.2581787109375,
+        1451.7777099609375
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 24,
+          "dir": 3
+        },
+        {
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 25,
+          "dir": 3
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "comparer_mode": "Slide"
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_pjfpz_00005_.png&type=temp&subfolder=&rand=0.1289658372341853"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_pjfpz_00006_.png&type=temp&subfolder=&rand=0.4446029372545113"
+          }
+        ]
+      ]
+    },
     {
       "id": 19,
       "type": "InvSRSampler",
       "pos": [
-        55.69900894165039,
-        686.448486328125
+        -376.679931640625,
+        1041.8802490234375
       ],
       "size": [
         315,
@@ -20,12 +67,12 @@
         {
           "name": "invsr_pipe",
           "type": "INVSR_PIPE",
-          "link": 20
+          "link": 33
         },
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 23
+          "link": 35
         }
       ],
       "outputs": [
@@ -33,7 +80,7 @@
           "name": "image",
           "type": "IMAGE",
           "links": [
-            22
+            25
           ],
           "slot_index": 0
         }
@@ -47,20 +94,20 @@
         8,
         128,
         "none",
-        2698764888,
-        "randomize"
+        2494903461,
+        "fixed"
       ]
     },
     {
       "id": 17,
       "type": "LoadImage",
       "pos": [
-        -358.5283203125,
-        657.36962890625
+        -867.9894409179688,
+        918.590087890625
       ],
       "size": [
-        243.02328491210938,
-        326.7896728515625
+        367.18212890625,
+        439.6049499511719
       ],
       "flags": {},
       "order": 0,
@@ -71,7 +118,8 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            23
+            24,
+            35
           ],
           "slot_index": 0
         },
@@ -85,20 +133,20 @@
         "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "32.jpg",
+        "frog.png",
         "image"
       ]
     },
     {
-      "id": 5,
+      "id": 25,
       "type": "LoadInvSRModels",
       "pos": [
-        -405.75823974609375,
-        447.1014404296875
+        -877.6565551757812,
+        719.943603515625
       ],
       "size": [
-        393.43359375,
-        115.4765625
+        413.84686279296875,
+        130
       ],
       "flags": {},
       "order": 1,
@@ -109,9 +157,8 @@
           "name": "invsr_pipe",
           "type": "INVSR_PIPE",
           "links": [
-            20
-          ],
-          "slot_index": 0
+            33
+          ]
         }
       ],
       "properties": {
@@ -120,56 +167,38 @@
       "widgets_values": [
         "stabilityai/sd-turbo",
         "noise_predictor_sd_turbo_v5.pth",
+        "bf16",
         true
       ]
-    },
-    {
-      "id": 7,
-      "type": "PreviewImage",
-      "pos": [
-        447.3740539550781,
-        346.762451171875
-      ],
-      "size": [
-        922.890869140625,
-        953.0285034179688
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 22
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      },
-      "widgets_values": []
     }
   ],
   "links": [
     [
+      24,
+      17,
+      0,
       20,
-      5,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      19,
+      0,
+      20,
+      1,
+      "IMAGE"
+    ],
+    [
+      33,
+      25,
       0,
       19,
       0,
       "INVSR_PIPE"
     ],
     [
-      22,
-      19,
-      0,
-      7,
-      0,
-      "IMAGE"
-    ],
-    [
-      23,
+      35,
       17,
       0,
       19,
@@ -181,10 +210,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.716405320312871,
+      "scale": 0.5559917313492331,
       "offset": [
-        852.8046167516175,
-        -157.41082842494103
+        1316.2804006933186,
+        -93.06983819464836
       ]
     },
     "VHS_latentpreview": false,
