@@ -1,0 +1,15 @@
+[project]
+name = "invsr"
+description = "This project is an unofficial ComfyUI implementation of [a/InvSR](https://github.com/zsyOAOA/InvSR) (Arbitrary-steps Image Super-resolution via Diffusion Inversion)"
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["pyiqa==0.1.12", "opencv-python", "albumentations==1.4.18", "bitsandbytes", "protobuf", "python-box", "omegaconf", "loguru"]
+
+[project.urls]
+Repository = "https://github.com/yuvraj108c/ComfyUI_InvSR"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI_InvSR"
+Icon = ""
