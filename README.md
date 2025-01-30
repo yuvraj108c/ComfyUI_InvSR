@@ -17,7 +17,7 @@ Navigate to the ComfyUI `/custom_nodes` directory
 git clone https://github.com/yuvraj108c/ComfyUI_InvSR
 cd ComfyUI_InvSR
 
-# Install diffusers (diffusers-0.30.0.dev0)
+# Install diffusers-0.30.0.dev0
 # ⚠️ Warning: This will likely break other nodes using diffusers!
 pip install -e ".[torch]"
 
