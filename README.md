@@ -17,20 +17,22 @@ Navigate to the ComfyUI `/custom_nodes` directory
 git clone https://github.com/yuvraj108c/ComfyUI_InvSR
 cd ComfyUI_InvSR
 
-# Install diffusers-0.30.0.dev0
-# ⚠️ Warning: This will likely break other nodes using diffusers!
-pip install -e ".[torch]"
-
-# Other requirements
+# requires diffusers>=0.28
 pip install -r requirements.txt
 ```
 
 ## Usage
 - Load [example workflow](workflows/invsr.json) 
 - Diffusers model (stabilityai/sd-turbo) will download automatically to `ComfyUI/models/diffusers`
-- InvSR model (noise_predictor_sd_turbo_v5.pth) will download automatically to `ComfyUI_InvSR/weights`
+- InvSR model (noise_predictor_sd_turbo_v5.pth) will download automatically to `ComfyUI/models/invsr`
 - To deal with large images, e.g, 1k---->4k, set `chopping_size` 256
 - If your GPU memory is limited, please set `chopping_batch_size` to 1
+
+## Updates
+**31 January 2024**
+- Merged https://github.com/yuvraj108c/ComfyUI_InvSR/pull/5 by [wfjsw](https://github.com/wfjsw)
+  - Compatibility with `diffusers>=0.28`
+  - Massive code refactoring & cleanup
 
 ## Citation
 ```bibtex
