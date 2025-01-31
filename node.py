@@ -1,7 +1,7 @@
-from .comfyui_invsr_trimmed import get_configs, InvSamplerSR, BaseSampler
+from .comfyui_invsr_trimmed import get_configs, InvSamplerSR, BaseSampler, Namespace
 import torch
 from comfy.utils import ProgressBar
-from folder_paths import get_full_path, get_folder_paths
+from folder_paths import get_full_path, get_folder_paths, models_dir
 import os
 
 def split_tensor_into_batches(tensor, batch_size):
@@ -39,14 +39,6 @@ def split_tensor_into_batches(tensor, batch_size):
     
     return batches
 
-class Namespace:
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-    
-    def __repr__(self):
-        items = [f"{key}={repr(value)}" for key, value in vars(self).items()]
-        return f"Namespace({', '.join(items)})"
 
 class LoadInvSRModels:
     @classmethod
@@ -78,7 +70,11 @@ class LoadInvSRModels:
             os.path.dirname(__file__), "configs", "sample-sd-turbo.yaml"
         )
         sd_path = get_folder_paths("diffusers")[0]
-        ckpt_path = get_full_path("invsr", "noise_predictor_sd_turbo_v5.pth")
+
+        try:
+            ckpt_dir = get_folder_paths("invsr")[0]
+        except:
+            ckpt_dir = os.path.join(models_dir, "invsr")
 
         args = Namespace(
             bs=1,
@@ -87,7 +83,7 @@ class LoadInvSRModels:
             num_steps=1,
             cfg_path=cfg_path,
             sd_path=sd_path,
-            started_ckpt_path=ckpt_path,
+            started_ckpt_dir=ckpt_dir,
             tiled_vae=tiled_vae,
             color_fix="",
             chopping_size=128,
@@ -128,7 +124,11 @@ class InvSRSampler:
             os.path.dirname(__file__), "configs", "sample-sd-turbo.yaml"
         )
         sd_path = get_folder_paths("diffusers")[0]
-        ckpt_path = get_full_path("invsr", "noise_predictor_sd_turbo_v5.pth")
+
+        try:
+            ckpt_dir = get_folder_paths("invsr")[0]
+        except:
+            ckpt_dir = os.path.join(models_dir, "invsr")
 
         args = Namespace(
             bs=batch_size,
@@ -137,7 +137,7 @@ class InvSRSampler:
             num_steps=num_steps,
             cfg_path=cfg_path,
             sd_path=sd_path,
-            started_ckpt_path=ckpt_path,
+            started_ckpt_dir=ckpt_dir,
             tiled_vae=base_sampler.configs.tiled_vae,
             color_fix=color_fix,
             chopping_size=chopping_size,
