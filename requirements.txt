@@ -1,8 +1,6 @@
-pyiqa==0.1.12
-opencv-python
-albumentations==1.4.18
-bitsandbytes
-protobuf
-python-box
+opencv-contrib-python-headless
 omegaconf
-loguru
+diffusers>=0.28.0
+numpy<2
+huggingface-hub
+transformers

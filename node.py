@@ -1,7 +1,8 @@
-from .InvSR.inference_invsr import get_configs
-from .InvSR.sampler_invsr import InvSamplerSR, BaseSampler
+from .comfyui_invsr_trimmed import get_configs, InvSamplerSR, BaseSampler, Namespace
 import torch
 from comfy.utils import ProgressBar
+from folder_paths import get_full_path, get_folder_paths, models_dir
+import os
 
 def split_tensor_into_batches(tensor, batch_size):
     """
@@ -38,14 +39,6 @@ def split_tensor_into_batches(tensor, batch_size):
     
     return batches
 
-class Namespace:
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-    
-    def __repr__(self):
-        items = [f"{key}={repr(value)}" for key, value in vars(self).items()]
-        return f"Namespace({', '.join(items)})"
 
 class LoadInvSRModels:
     @classmethod
@@ -73,8 +66,28 @@ class LoadInvSRModels:
             case "bf16":
                 dtype = "torch.bfloat16"
 
-        
-        args = Namespace(bs=1, chopping_bs=8, timesteps=None, num_steps=1, cfg_path='custom_nodes/ComfyUI_InvSR/InvSR/configs/sample-sd-turbo.yaml', sd_path='models/diffusers', started_ckpt_path='custom_nodes/ComfyUI_InvSR/weights/noise_predictor_sd_turbo_v5.pth', tiled_vae=tiled_vae, color_fix='', chopping_size=128)
+        cfg_path = os.path.join(
+            os.path.dirname(__file__), "configs", "sample-sd-turbo.yaml"
+        )
+        sd_path = get_folder_paths("diffusers")[0]
+
+        try:
+            ckpt_dir = get_folder_paths("invsr")[0]
+        except:
+            ckpt_dir = os.path.join(models_dir, "invsr")
+
+        args = Namespace(
+            bs=1,
+            chopping_bs=8,
+            timesteps=None,
+            num_steps=1,
+            cfg_path=cfg_path,
+            sd_path=sd_path,
+            started_ckpt_dir=ckpt_dir,
+            tiled_vae=tiled_vae,
+            color_fix="",
+            chopping_size=128,
+        )
         configs = get_configs(args)
         configs["sd_pipe"]["params"]["torch_dtype"] = dtype
         base_sampler = BaseSampler(configs)
@@ -107,7 +120,28 @@ class InvSRSampler:
         if color_fix == "none":
             color_fix = ""
 
-        args = Namespace(bs=batch_size, chopping_bs=chopping_batch_size, timesteps=None, num_steps=num_steps, cfg_path='custom_nodes/ComfyUI_InvSR/InvSR/configs/sample-sd-turbo.yaml', sd_path='models/diffusers', started_ckpt_path='custom_nodes/ComfyUI_InvSR/weights/noise_predictor_sd_turbo_v5.pth', tiled_vae=base_sampler.configs.tiled_vae, color_fix=color_fix, chopping_size=chopping_size)
+        cfg_path = os.path.join(
+            os.path.dirname(__file__), "configs", "sample-sd-turbo.yaml"
+        )
+        sd_path = get_folder_paths("diffusers")[0]
+
+        try:
+            ckpt_dir = get_folder_paths("invsr")[0]
+        except:
+            ckpt_dir = os.path.join(models_dir, "invsr")
+
+        args = Namespace(
+            bs=batch_size,
+            chopping_bs=chopping_batch_size,
+            timesteps=None,
+            num_steps=num_steps,
+            cfg_path=cfg_path,
+            sd_path=sd_path,
+            started_ckpt_dir=ckpt_dir,
+            tiled_vae=base_sampler.configs.tiled_vae,
+            color_fix=color_fix,
+            chopping_size=chopping_size,
+        )
         configs = get_configs(args)
         base_sampler.configs = get_configs(args, log=True)
         base_sampler.setup_seed(seed)
