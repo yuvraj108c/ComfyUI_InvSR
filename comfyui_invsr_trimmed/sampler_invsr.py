@@ -220,7 +220,7 @@ class InvSamplerSR(BaseSampler):
             else:
                 raise ValueError(f"Unsupported color fixing type: {self.configs.color_fix}")
 
-        res_sr = res_sr.clamp(0.0, 1.0).cpu().permute(0,2,3,1).float().numpy()
+        res_sr = res_sr.clamp(0.0, 1.0).cpu().float().numpy()
 
         return res_sr
 
