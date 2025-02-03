@@ -29,7 +29,12 @@ pip install -r requirements.txt
 - If your GPU memory is limited, please set `chopping_batch_size` to 1
 
 ## Updates
-**31 January 2024**
+**03 February 2025**
+- Add cfg parameter
+- Make image divisible by 16
+- Use `mm` to set torch device
+  
+**31 January 2025**
 - Merged https://github.com/yuvraj108c/ComfyUI_InvSR/pull/5 by [wfjsw](https://github.com/wfjsw)
   - Compatibility with `diffusers>=0.28`
   - Massive code refactoring & cleanup
