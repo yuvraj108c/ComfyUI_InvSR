@@ -28,6 +28,14 @@ pip install -r requirements.txt
 - To deal with large images, e.g, 1k---->4k, set `chopping_size` 256
 - If your GPU memory is limited, please set `chopping_batch_size` to 1
 
+## Parameters
+- `num_steps`: number of inference steps
+- `cfg`: classifier-free guidance scale
+- `batch_size`: Controls how many complete images are processed simultaneously
+- `chopping_batch_size`: Controls how many patches from the same image are processed simultaneously
+- `chopping_size`: Controls the size of patches when splitting large images
+- `color_fix`: Method to fix color shift in processed images
+
 ## Updates
 **03 February 2025**
 - Add cfg parameter
