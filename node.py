@@ -144,7 +144,6 @@ class InvSRSampler:
             color_fix=color_fix,
             chopping_size=chopping_size,
         )
-        configs = get_configs(args)
         configs = get_configs(args, log=True)
         configs["cfg_scale"] = cfg
         # configs["basesr"]["sf"] = scale_factor
