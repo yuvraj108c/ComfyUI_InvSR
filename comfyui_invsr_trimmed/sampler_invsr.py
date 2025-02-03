@@ -19,6 +19,8 @@ import torch.multiprocessing as mean_psnr
 
 from .pipeline_stable_diffusion_inversion_sr import StableDiffusionInvEnhancePipeline
 from diffusers import AutoencoderKL
+import comfy.model_management as mm
+DEVICE = mm.get_torch_device()
 
 _positive= 'Cinematic, high-contrast, photo-realistic, 8k, ultra HD, ' +\
            'meticulous detailing, hyper sharpness, perfect without deformations'
@@ -76,7 +78,7 @@ class BaseSampler:
             sd_pipe = StableDiffusionInvEnhancePipeline.from_pipe(base_pipe)
         else:
             raise ValueError(f"Unsupported base model: {self.configs.base_model}!")
-        sd_pipe.to(f"cuda")
+        sd_pipe.to(DEVICE)
         if self.configs.sliced_vae:
             sd_pipe.vae.enable_slicing()
         if self.configs.tiled_vae:
@@ -91,11 +93,11 @@ class BaseSampler:
         model_configs = self.configs.model_start
         params = model_configs.get('params', dict)
         model_start = util_common.get_obj_from_str(model_configs.target)(**params)
-        model_start.cuda()
+        model_start.to(DEVICE)
         ckpt_path = model_configs.get('ckpt_path')
         assert ckpt_path is not None
         self.write_log(f"[InvSR] - Loading started model from {ckpt_path}...")
-        state = torch.load(ckpt_path, map_location=f"cuda")
+        state = torch.load(ckpt_path, map_location=DEVICE)
         if 'state_dict' in state:
             state = state['state_dict']
         util_net.reload_model(model_start, state)
@@ -225,7 +227,7 @@ class InvSamplerSR(BaseSampler):
         return res_sr
 
     def inference(self, image_bchw):
-        return self.sample_func(image_bchw.cuda())
+        return self.sample_func(image_bchw.to(DEVICE))
 
 def get_torch_dtype(torch_dtype: str):
     if torch_dtype == 'torch.float16':
