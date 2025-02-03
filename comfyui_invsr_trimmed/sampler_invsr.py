@@ -120,10 +120,8 @@ class InvSamplerSR(BaseSampler):
         Output:
             xt: h x w x c, numpy array, [0,1], RGB
         '''
-        if self.configs.cfg_scale > 1.0:
-            negative_prompt = [_negative,]*im_cond.shape[0]
-        else:
-            negative_prompt = None
+
+        
 
         ori_h_lq, ori_w_lq = im_cond.shape[-2:]
         ori_w_hq = ori_w_lq * self.configs.basesr.sf
@@ -154,7 +152,7 @@ class InvSamplerSR(BaseSampler):
             res_sr = self.sd_pipe(
                 image=im_cond.type(torch.float16),
                 prompt=[_positive, ]*im_cond.shape[0],
-                negative_prompt=negative_prompt,
+                negative_prompt=[_negative, ]*im_cond.shape[0] if self.configs.cfg_scale > 1.0 else None,
                 target_size=target_size,
                 timesteps=self.configs.timesteps,
                 guidance_scale=self.configs.cfg_scale,
@@ -192,7 +190,7 @@ class InvSamplerSR(BaseSampler):
                 res_sr_pch = self.sd_pipe(
                     image=im_lq_pch.type(torch.float16),
                     prompt=[_positive, ]*im_lq_pch.shape[0],
-                    negative_prompt=negative_prompt,
+                    negative_prompt=[_negative, ]*im_lq_pch.shape[0] if self.configs.cfg_scale > 1.0 else None,
                     target_size=target_size,
                     timesteps=self.configs.timesteps,
                     guidance_scale=self.configs.cfg_scale,

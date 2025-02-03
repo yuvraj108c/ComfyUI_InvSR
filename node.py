@@ -102,6 +102,8 @@ class InvSRSampler:
                 "invsr_pipe": ("INVSR_PIPE",),
                 "images": ("IMAGE",),
                 "num_steps": ("INT",{"default": 1, "min": 1, "max": 5}),
+                "cfg": ("FLOAT",{"default": 1.0, "step":0.1}),
+                "scale_factor": ("INT",{"default": 4}),
                 "batch_size": ("INT",{"default": 1}),
                 "chopping_batch_size": ("INT",{"default": 8}),
                 "chopping_size": ([128, 256, 512],{"default": 128}),
@@ -115,7 +117,7 @@ class InvSRSampler:
     FUNCTION = "process"
     CATEGORY = "INVSR"
 
-    def process(self, invsr_pipe, images, num_steps, batch_size, chopping_batch_size, chopping_size, color_fix, seed):
+    def process(self, invsr_pipe, images, num_steps, cfg, scale_factor, batch_size, chopping_batch_size, chopping_size, color_fix, seed):
         base_sampler = invsr_pipe
         if color_fix == "none":
             color_fix = ""
@@ -143,7 +145,11 @@ class InvSRSampler:
             chopping_size=chopping_size,
         )
         configs = get_configs(args)
-        base_sampler.configs = get_configs(args, log=True)
+        configs = get_configs(args, log=True)
+        configs["cfg_scale"] = cfg
+        # configs["basesr"]["sf"] = scale_factor
+        
+        base_sampler.configs = configs
         base_sampler.setup_seed(seed)
         sampler = InvSamplerSR(base_sampler)
 
