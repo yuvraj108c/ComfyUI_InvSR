@@ -59,3 +59,7 @@ pip install -r requirements.txt
 
 ## License
 This project is licensed under [NTU S-Lab License 1.0](LICENSE)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=yuvraj108c/ComfyUI_InvSR&type=Date)](https://star-history.com/#yuvraj108c/ComfyUI_InvSR&Date)
