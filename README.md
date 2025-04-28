@@ -17,7 +17,7 @@ Navigate to the ComfyUI `/custom_nodes` directory
 git clone https://github.com/yuvraj108c/ComfyUI_InvSR
 cd ComfyUI_InvSR
 
-# requires diffusers>=0.28
+# requires diffusers>=0.28.0,<=0.32.2
 pip install -r requirements.txt
 ```
 
@@ -37,6 +37,9 @@ pip install -r requirements.txt
 - `color_fix`: Method to fix color shift in processed images
 
 ## Updates
+**28 April 2025**
+- Pin diffusers max version in requirements.txt to fix https://github.com/yuvraj108c/ComfyUI_InvSR/issues/26 and https://github.com/yuvraj108c/ComfyUI_InvSR/issues/21
+  
 **03 February 2025**
 - Add cfg parameter
 - Make image divisible by 16
@@ -60,6 +63,8 @@ pip install -r requirements.txt
 ## License
 This project is licensed under [NTU S-Lab License 1.0](LICENSE)
 
-## Star History
+## Acknowledgments
+Thanks to [simplepod.ai](https://simplepod.ai/) for providing GPU servers
 
+## Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=yuvraj108c/ComfyUI_InvSR&type=Date)](https://star-history.com/#yuvraj108c/ComfyUI_InvSR&Date)
