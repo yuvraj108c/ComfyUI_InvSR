@@ -10,6 +10,6 @@ Repository = "https://github.com/yuvraj108c/ComfyUI_InvSR"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = ""
+PublisherId = "yuvraj108c"
 DisplayName = "ComfyUI_InvSR"
 Icon = ""
