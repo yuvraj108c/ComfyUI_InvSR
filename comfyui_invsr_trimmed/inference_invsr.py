@@ -52,7 +52,7 @@ def get_configs(args, log=False):
     configs.sd_pipe.params.cache_dir = sd_path
 
     # path to save noise predictor
-    started_ckpt_name = "noise_predictor_sd_turbo_v5.pth"
+    started_ckpt_name = args.invsr_model
 
     if getattr(args, "started_ckpt_dir", None) is not None:
         started_ckpt_dir = args.started_ckpt_dir
@@ -68,7 +68,7 @@ def get_configs(args, log=False):
     if not Path(started_ckpt_path).exists():
         temp_path = hf_hub_download(
             repo_id="OAOA/InvSR",
-            filename="noise_predictor_sd_turbo_v5.pth",
+            filename=started_ckpt_name,
         )
         copy2(temp_path, started_ckpt_path)
     configs.model_start.ckpt_path = str(started_ckpt_path)
