@@ -47,7 +47,7 @@ class LoadInvSRModels:
         return {
             "required": {
                 "sd_model": (['stabilityai/sd-turbo'],),
-                "invsr_model": (['noise_predictor_sd_turbo_v5.pth'],),
+                "invsr_model": (['noise_predictor_sd_turbo_v5.pth', 'noise_predictor_sd_turbo_v5_diftune.pth'],),
                 "dtype": (['fp16', 'fp32', 'bf16'], {"default": "fp16"}),
                 "tiled_vae": ("BOOLEAN", {"default": True}),
             },
@@ -88,12 +88,13 @@ class LoadInvSRModels:
             tiled_vae=tiled_vae,
             color_fix="",
             chopping_size=128,
+            invsr_model=invsr_model
         )
         configs = get_configs(args)
         configs["sd_pipe"]["params"]["torch_dtype"] = dtype
         base_sampler = BaseSampler(configs)
 
-        return (base_sampler,)
+        return ((base_sampler, invsr_model),)
 
 class InvSRSampler:
     @classmethod
@@ -119,7 +120,7 @@ class InvSRSampler:
     CATEGORY = "INVSR"
 
     def process(self, invsr_pipe, images, num_steps, cfg, batch_size, chopping_batch_size, chopping_size, color_fix, seed):
-        base_sampler = invsr_pipe
+        base_sampler, invsr_model = invsr_pipe
         if color_fix == "none":
             color_fix = ""
 
@@ -144,6 +145,7 @@ class InvSRSampler:
             tiled_vae=base_sampler.configs.tiled_vae,
             color_fix=color_fix,
             chopping_size=chopping_size,
+            invsr_model=invsr_model
         )
         configs = get_configs(args, log=True)
         configs["cfg_scale"] = cfg
