@@ -39,6 +39,7 @@ pip install -r requirements.txt
 ## Updates
 **28 April 2025**
 - Pin diffusers max version in requirements.txt to fix https://github.com/yuvraj108c/ComfyUI_InvSR/issues/26 and https://github.com/yuvraj108c/ComfyUI_InvSR/issues/21
+- Add support for `noise_predictor_sd_turbo_v5_diftune.pth`
   
 **03 February 2025**
 - Add cfg parameter
