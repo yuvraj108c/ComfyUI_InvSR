@@ -17,7 +17,7 @@ Navigate to the ComfyUI `/custom_nodes` directory
 git clone https://github.com/yuvraj108c/ComfyUI_InvSR
 cd ComfyUI_InvSR
 
-# requires diffusers>=0.28.0,<=0.32.2
+# requires diffusers>=0.30.0,<=0.32.2
 pip install -r requirements.txt
 ```
 
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 ## Updates
 **28 April 2025**
-- Pin diffusers max version in requirements.txt to fix https://github.com/yuvraj108c/ComfyUI_InvSR/issues/26 and https://github.com/yuvraj108c/ComfyUI_InvSR/issues/21
+- Update diffusers versions in requirements.txt to fix https://github.com/yuvraj108c/ComfyUI_InvSR/issues/26, https://github.com/yuvraj108c/ComfyUI_InvSR/issues/21, https://github.com/yuvraj108c/ComfyUI_InvSR/issues/15
 - Add support for `noise_predictor_sd_turbo_v5_diftune.pth`
   
 **03 February 2025**
