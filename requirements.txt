@@ -1,6 +1,6 @@
 opencv-contrib-python-headless
 omegaconf
-diffusers>=0.28.0
+diffusers>=0.28.0,<=0.32.2
 numpy<2
 huggingface-hub
 transformers
