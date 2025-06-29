@@ -87,8 +87,7 @@ class BaseSampler:
             sd_pipe.vae.tile_sample_min_size = self.configs.sample_tiled_size
         if self.configs.gradient_checkpointing_vae:
             self.write_log(f"Activating gradient checkpoing for vae...")
-            sd_pipe.vae._set_gradient_checkpointing(sd_pipe.vae.encoder, True)
-            sd_pipe.vae._set_gradient_checkpointing(sd_pipe.vae.decoder, True)
+            sd_pipe.vae.enable_gradient_checkpointing()
 
         model_configs = self.configs.model_start
         params = model_configs.get('params', dict)
