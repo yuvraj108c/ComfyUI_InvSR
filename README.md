@@ -33,7 +33,6 @@ Navigate to the ComfyUI `/custom_nodes` directory
 git clone https://github.com/yuvraj108c/ComfyUI_InvSR
 cd ComfyUI_InvSR
 
-# requires diffusers>=0.30.0,<=0.32.2
 pip install -r requirements.txt
 ```
 
