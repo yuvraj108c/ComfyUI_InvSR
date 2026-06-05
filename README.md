@@ -5,7 +5,7 @@
 
 This project is a ComfyUI wrapper for [InvSR](https://github.com/zsyOAOA/InvSR) (Arbitrary-steps Image Super-resolution via Diffusion Inversion)
 
-**Last tested**: 2 January 2026 (ComfyUI v0.7.0@f2fda02 | Torch 2.9.1 | Python 3.10.12 | RTX4090 | CUDA 13.0 | Debian 12)
+**Last tested**: 05 June 2026 (ComfyUI v0.23.0 | Torch 2.12.0 | Python 3.12.3 | L40S | CUDA 13.0 | Ubuntu 24.04)
 
 <img height="400" src="https://github.com/user-attachments/assets/6c057a3c-3355-4060-9161-a88ab6f6d986" />
 
@@ -80,9 +80,6 @@ pip install -r requirements.txt
 
 ## License
 This project is licensed under [NTU S-Lab License 1.0](LICENSE)
-
-## Acknowledgments
-Thanks to [simplepod.ai](https://simplepod.ai/) for providing GPU servers
 
 ## Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=yuvraj108c/ComfyUI_InvSR&type=Date)](https://star-history.com/#yuvraj108c/ComfyUI_InvSR&Date)
